@@ -10,3 +10,6 @@ test/bower_components/
 .editorconfig
 .gitattributes
 .jshintrc
+composer.lock
+composer.phar
+vendor/

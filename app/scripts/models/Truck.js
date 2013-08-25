@@ -9,7 +9,6 @@ define(['backbone', 'collections/Schedule'], function(Backbone, Schedule){
         },
 
         initialize: function(attributes, options) {
-            this.scheduleChanged();
             this.on('change:schedule', this.scheduleChanged, this);
         },
 

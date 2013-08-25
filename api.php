@@ -47,7 +47,7 @@ try{
         try{
             $truck = API::getTruck($mongoClient, $id);
             if(isset($truck['permit']) && isset($truck['block']) && isset($truck['lot'])){
-                $truck['schedule'] = API::getSchedule($mongoClient, $truck['permit'], $truck['block'], $truck['lot']);
+                $truck['schedule'] = API::getSchedule($mongoClient, $truck['permit'], (int)$truck['block'], (int)$truck['lot']);
             }
             $response->setData($truck);
         }
@@ -72,7 +72,7 @@ try{
      * Get's all schedule information for a given truck,
      * The unique key for a truck is a composite of permit, block and lot.
      */
-    $app->get('/schedules/:permit:block:lot', function($permit, $block, $lot) use($mongoClient) {
+    $app->get('/schedules/:permit/:block/:lot', function($permit, $block, $lot) use($mongoClient) {
         $response = new APIResponse();
         try{
             $response->setData(API::getSchedule($mongoClient, $permit, $block, $lot));

@@ -19,6 +19,21 @@ define(['backbone', 'collections/Schedule'], function(Backbone, Schedule){
                 this.schedule.set(schedule);
                 this.unset('schedule');
             }
+        },
+
+        /**
+         * Parse the API response for a truck.
+         * If it's wrapped in an API response, extract the data,
+         * otherwise load as normal.
+         * We need this because when a model is created via the collection, each one isn't wrapped in an API response
+         * @param response
+         * @returns {*}
+         */
+        parse: function(response){
+            if(response.result && response.data){
+                return response.data;
+            }
+            return response;
         }
 
     });

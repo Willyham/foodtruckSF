@@ -1,7 +1,7 @@
-define(['backbone', 'models/Schedule'], function(Backbone, Schedule){
+define(['backbone', 'models/ScheduleItem'], function(Backbone, ScheduleItem){
     return Backbone.Collection.extend({
         url: '../api.php/schedules',
-        model: Schedule
+        model: ScheduleItem
     });
 });
 

@@ -33,9 +33,22 @@ require([
 
     var trucksCollection = new Trucks();
     trucksCollection.fetch().done(function(){
+        debugger;
         var truck = trucksCollection.first();
         console.log(truck);
+        printSchedule(truck.schedule);
+
+        truck.fetch().done(function(){
+            printSchedule(truck.schedule);
+        });
+
     });
+
+    function printSchedule(s){
+        s.forEach(function(a){
+            console.log(a);
+        })
+    }
 
     Backbone.history.start();
 });

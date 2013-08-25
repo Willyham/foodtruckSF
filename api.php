@@ -1,5 +1,6 @@
 <?php
 require 'vendor/autoload.php';
+require 'lib/APIUtils.php';
 
 try{
     $app = new \Slim\Slim(array(
@@ -16,10 +17,10 @@ try{
     $app->get('/trucks', function() use($app, $mongoClient) {
         try{
             $trucksCollection = $mongoClient->foodtrucks->trucks;
-            $truckCursor = $trucksCollection->find();
+            $truckCursor = $trucksCollection->find()->limit(1);
             $trucks = array();
             while($truck = $truckCursor->getNext()){
-                array_push($trucks, $truck);
+                array_push($trucks, APIUtils::flattenMongoID($truck));
             }
             echo json_encode($trucks);
         }
@@ -32,6 +33,8 @@ try{
         try{
             $trucksCollection = $mongoClient->foodtrucks->trucks;
             $truck = $trucksCollection->findOne(array("_id" => new MongoId($id)));
+            $truck = APIUtils::flattenMongoID($truck);
+            $truck['schedule'] = array('mock','mock2');
             echo json_encode($truck);
         }
         catch (Exception $e){

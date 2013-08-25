@@ -15,8 +15,7 @@ define([
 
             this.marker = new google.maps.Marker({
                 position: new google.maps.LatLng(this.model.get('Latitude'), this.model.get('Longitude')),
-                animation: google.maps.Animation.DROP,
-                //title: self.model.name,
+                title: this.model.get('Applicant'),
                 id : this.model.get('id')
             });
         },

@@ -19,6 +19,10 @@ require.config({
         },
         clusterer: {
             exports: 'MarkerClusterer'
+        },
+        typeahead: {
+            deps: ['backbone'],
+            exports: 'TypeAhead'
         }
     },
     paths: {
@@ -27,15 +31,17 @@ require.config({
         underscore: '../bower_components/underscore/underscore',
         bootstrap: 'vendor/bootstrap',
         async: '../bower_components/requirejs-plugins/src/async',
-        clusterer: '../bower_components/clusterer/markerclusterer'
+        clusterer: 'vendor/clusterer/markerclusterer',
+        typeahead: 'vendor/backbone.typeahead/backbone.typeahead'
     }
 });
 
 require([
     'backbone',
     'collections/Trucks',
-    'views/MapView'
-], function (Backbone, Trucks, MapView ) {
+    'views/MapView',
+    'views/TruckSearchView'
+], function (Backbone, Trucks, MapView, TruckSearchView) {
 
     var trucksCollection = new Trucks();
     var mapView = new MapView({
@@ -45,6 +51,10 @@ require([
 
     trucksCollection.fetch().done(function(){
 
+        var truckSearchView = new TruckSearchView({
+            collection: trucksCollection
+        });
+        $('#truckSearchContainer').html(truckSearchView.render());
     });
 
     Backbone.history.start();

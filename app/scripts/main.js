@@ -37,7 +37,6 @@ require([
     var mapView = new MapView({
         collection: trucksCollection
     });
-
     mapView.render();
 
     trucksCollection.fetch().done(function(){

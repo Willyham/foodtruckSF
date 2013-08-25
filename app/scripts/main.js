@@ -22,33 +22,27 @@ require.config({
         jquery: '../bower_components/jquery/jquery',
         backbone: '../bower_components/backbone/backbone',
         underscore: '../bower_components/underscore/underscore',
-        bootstrap: 'vendor/bootstrap'
+        bootstrap: 'vendor/bootstrap',
+        async: '../bower_components/requirejs-plugins/src/async'
     }
 });
 
 require([
     'backbone',
-    'collections/Trucks'
-], function (Backbone, Trucks) {
+    'collections/Trucks',
+    'views/MapView'
+], function (Backbone, Trucks, MapView ) {
 
     var trucksCollection = new Trucks();
-    trucksCollection.fetch().done(function(){
-        debugger;
-        var truck = trucksCollection.first();
-        console.log(truck);
-        printSchedule(truck.schedule);
-
-        truck.fetch().done(function(){
-            printSchedule(truck.schedule);
-        });
-
+    var mapView = new MapView({
+        collection: trucksCollection
     });
 
-    function printSchedule(s){
-        s.forEach(function(a){
-            console.log(a);
-        })
-    }
+    mapView.render();
+
+    trucksCollection.fetch().done(function(){
+
+    });
 
     Backbone.history.start();
 });

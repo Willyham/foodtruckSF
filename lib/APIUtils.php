@@ -7,5 +7,4 @@ class APIUtils {
         }
         return $mongoResult;
     }
-
 }

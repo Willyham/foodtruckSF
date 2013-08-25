@@ -75,7 +75,7 @@ try{
     $app->get('/schedules/:permit/:block/:lot', function($permit, $block, $lot) use($mongoClient) {
         $response = new APIResponse();
         try{
-            $response->setData(API::getSchedule($mongoClient, $permit, $block, $lot));
+            $response->setData(API::getSchedule($mongoClient, $permit, (int)$block, (int)$lot));
         }
         catch (Exception $e){
             $response->failWithException($e);

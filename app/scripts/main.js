@@ -27,7 +27,15 @@ require.config({
 });
 
 require([
-    'backbone'
-], function (Backbone) {
+    'backbone',
+    'collections/Trucks'
+], function (Backbone, Trucks) {
+
+    var trucksCollection = new Trucks();
+    trucksCollection.fetch().done(function(){
+        var truck = trucksCollection.first();
+        console.log(truck);
+    });
+
     Backbone.history.start();
 });

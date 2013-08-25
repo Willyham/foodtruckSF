@@ -28,7 +28,7 @@ try{
         }
     });
 
-    $app->get('/truck/:id', function($id) use($app, $mongoClient) {
+    $app->get('/trucks/:id', function($id) use($app, $mongoClient) {
         try{
             $trucksCollection = $mongoClient->foodtrucks->trucks;
             $truck = $trucksCollection->findOne(array("_id" => new MongoId($id)));

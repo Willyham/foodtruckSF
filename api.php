@@ -1,6 +1,10 @@
 <?php
 require 'vendor/autoload.php';
-require 'lib/APIUtils.php';
+
+// Register autoloader for libs.
+spl_autoload_register(function ($class) {
+    include 'lib/' . $class . '.php';
+});
 
 try{
     $app = new \Slim\Slim(array(
@@ -14,38 +18,38 @@ try{
     $mongoConfig = $app->config('mongo');
     $mongoClient = new MongoClient(sprintf('mongodb://%s/%s', $mongoConfig['host'], $mongoConfig['database']));
 
-    $app->get('/trucks', function() use($app, $mongoClient) {
+    $app->get('/trucks', function() use($mongoClient) {
         try{
-            $trucksCollection = $mongoClient->foodtrucks->trucks;
-            $truckCursor = $trucksCollection->find()->limit(1);
-            $trucks = array();
-            while($truck = $truckCursor->getNext()){
-                array_push($trucks, APIUtils::flattenMongoID($truck));
-            }
-            echo json_encode($trucks);
+            echo json_encode(API::getTrucks($mongoClient));
         }
         catch (Exception $e){
             echo $e->getMessage();
         }
     });
 
-    $app->get('/trucks/:id', function($id) use($app, $mongoClient) {
+    $app->get('/trucks/:id', function($id) use($mongoClient) {
         try{
-            $trucksCollection = $mongoClient->foodtrucks->trucks;
-            $truck = $trucksCollection->findOne(array("_id" => new MongoId($id)));
-            $truck = APIUtils::flattenMongoID($truck);
-            $truck['schedule'] = array('mock','mock2');
+            $truck = API::getTruck($mongoClient, $id);
+            if(isset($truck['permit']) && isset($truck['block']) && isset($truck['lot'])){
+                $truck['schedule'] = API::getSchedule($mongoClient, $truck['permit'], $truck['block'], $truck['lot']);
+            }
             echo json_encode($truck);
         }
+        catch (MongoException $e){
+            // If we have a bad id then instantiating a MongoId throws an exception'.
+            // return an empty set to the client.
+            if($e->getCode() == 19){
+                echo json_encode(array());
+            }
+        }
         catch (Exception $e){
             echo $e->getMessage();
         }
     });
 
-    $app->get('/schedule/:permit', function($permit) use($app, $mongoClient) {
+    $app->get('/schedule/:permit:block:lot', function($permit, $block, $lot) use($mongoClient) {
         try{
-            $scheduleCollection = $mongoClient->foodtrucks->schedules;
-            $schedule = $scheduleCollection->findOne(array("permit" => $permit));
+            $schedule = API::getSchedule($mongoClient, $permit, $block, $lot);
             echo json_encode($schedule);
         }
         catch (Exception $e){

@@ -19,14 +19,10 @@ define([
                 //title: self.model.name,
                 id : this.model.get('id')
             });
-
-            this.listenTo(this.model, 'change', this.render);
         },
 
-        render: function(){
-            if(!this.marker.getMap()){
-                this.marker.setMap(this.options.map);
-            }
+        getMarker: function(){
+            return this.marker;
         }
     })
 });

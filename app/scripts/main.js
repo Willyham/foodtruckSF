@@ -16,6 +16,9 @@ require.config({
         bootstrap: {
             deps: ['jquery'],
             exports: 'jquery'
+        },
+        clusterer: {
+            exports: 'MarkerClusterer'
         }
     },
     paths: {
@@ -23,7 +26,8 @@ require.config({
         backbone: '../bower_components/backbone/backbone',
         underscore: '../bower_components/underscore/underscore',
         bootstrap: 'vendor/bootstrap',
-        async: '../bower_components/requirejs-plugins/src/async'
+        async: '../bower_components/requirejs-plugins/src/async',
+        clusterer: '../bower_components/clusterer/markerclusterer'
     }
 });
 

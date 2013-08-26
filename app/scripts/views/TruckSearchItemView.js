@@ -8,7 +8,8 @@ define([
 
         events: {
             'click': 'selectItem',
-            'mouseover truckFood': 'activateItem'
+            'mouseover': 'activateItem',
+            'mouseout': 'deactivateItem'
         },
 
         initialize: function(options){
@@ -33,8 +34,13 @@ define([
         selectItem: function() {
             this.parent.selectModel(this.model);
         },
-        activateItem: function() {
-            this.parent.activateModel(this.model);
+
+        activateItem: function(){
+            this.$el.children('.truckAddress').addClass('active');
+        },
+
+        deactivateItem: function(){
+            this.$el.children('.truckAddress').removeClass('active');
         }
     })
 });

@@ -40,6 +40,13 @@ html, body {
         padding: 4px;
         height: 50px;
         position: relative;
+        display: block;
+
+        &:hover{
+            background-color: #efefef;
+            background-image: repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255,255,255,0.7) 35px, rgba(255,255,255,0.7) 70px);
+            cursor: pointer;
+        }
 
         & .truckName{
             font-weight: bold;
@@ -61,6 +68,11 @@ html, body {
             top: 0;
             float: right;
             color: #aaa;
+        }
+
+        & .truckAddress.active{
+            color: #000;
+            border-bottom: 1px dotted rgba(0,0,0,0.5);
         }
     }
 }

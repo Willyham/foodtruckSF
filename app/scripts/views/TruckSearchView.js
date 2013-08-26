@@ -17,6 +17,9 @@ define([
                 view: TruckSearchItemView
             });
             this.typeAhead.on('selected', function(truck){
+                truck.collection.forEach(function(otherTrucks){
+                    otherTrucks.set('selected', false);
+                });
                 truck.set('selected', true);
             });
         },

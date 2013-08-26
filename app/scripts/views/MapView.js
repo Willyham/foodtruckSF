@@ -26,13 +26,12 @@ define([
            }
            this.listenTo(this.collection, 'add', this.renderTruck);
            this.listenTo(this.collection, 'remove', this.removeTruck);
-           this.listenTo(this.collection, 'change:selected', this.selectTruck)
+           this.listenTo(this.collection, 'change:selected', this.selectTruck);
        },
 
        render: function(){
            this.map = new google.maps.Map(this.el, this.options.map);
            this.clusterer = new MarkerClusterer(this.map, [], {
-               gridSize: 40,
                maxZoom: 18
            });
            return this;
@@ -48,7 +47,13 @@ define([
        },
 
        selectTruck: function(truck){
-           this.zoomToTruck(truck);
+           if(truck.get('selected')){
+               this.zoomToTruck(truck);
+               this.showDetails(truck);
+           }
+           else{
+               this.hideDetails(truck);
+           }
        },
 
        zoomToTruck: function(truck){
@@ -56,6 +61,16 @@ define([
            var marker = truckView.getMarker();
            this.map.setZoom(18);
            this.map.panTo(marker.position);
+       },
+
+       showDetails: function(truck){
+           var truckView = this.truckViews[truck.id];
+           truckView.showDetails();
+       },
+
+       hideDetails: function(truck){
+           var truckView = this.truckViews[truck.id];
+           truckView.hideDetails();
        }
    })
 });

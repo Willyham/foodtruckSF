@@ -4884,7 +4884,12 @@ html, body {
   #truckSearchContainer .truckSearchItemView {
     padding: 4px;
     height: 50px;
-    position: relative; }
+    position: relative;
+    display: block; }
+    #truckSearchContainer .truckSearchItemView:hover {
+      background-color: #efefef;
+      background-image: repeating-linear-gradient(-45deg, transparent, transparent 35px, rgba(255, 255, 255, 0.7) 35px, rgba(255, 255, 255, 0.7) 70px);
+      cursor: pointer; }
     #truckSearchContainer .truckSearchItemView .truckName {
       font-weight: bold;
       float: left; }
@@ -4901,6 +4906,9 @@ html, body {
       top: 0;
       float: right;
       color: #aaa; }
+    #truckSearchContainer .truckSearchItemView .truckAddress.active {
+      color: #000;
+      border-bottom: 1px dotted rgba(0, 0, 0, 0.5); }
 
 .dropdown-menu {
   width: 350px;

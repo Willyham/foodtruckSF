@@ -14,15 +14,13 @@ html, body {
 }
 
 #truckSearchContainer {
-    max-width: 350px;
-    max-height: 45px;
     position: absolute;
     top: 50px;
     left: 50px;
     z-index: 2;
 
     & .truckSearch input{
-        width: 350px;
+        width: 366px;
         height: 25px;
         border-radius: 0px;
         -webkit-box-shadow: 0 4px 16px rgba(0,0,0,.2);
@@ -33,10 +31,11 @@ html, body {
         border: 1px solid #acacac;
         border: 1px solid rgba(0,0,0,.333);
         outline: 0;
+        margin-bottom: 0;
     }
 
     & .truckSearchItemView{
-
+        width: 360px;
         padding: 4px;
         height: 50px;
         position: relative;
@@ -49,13 +48,13 @@ html, body {
         }
 
         & .truckName{
-            width: 220px;
+            width: 200px;
             font-weight: bold;
             float: left;
         }
 
         & .truckFood{
-            width: 350px;
+            width: 360px;
         }
 
         & .truckAddress{
@@ -82,7 +81,7 @@ html, body {
 }
 
 .dropdown-menu {
-    width: 350px;
+    width: 366px;
     border: 1px solid #acacac;
     border: 1px solid rgba(0,0,0,.333);
     border-radius: 0px;

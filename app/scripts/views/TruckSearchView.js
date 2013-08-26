@@ -1,7 +1,8 @@
 define([
     'backbone',
     'views/TruckSearchItemView',
-    'typeahead'], function(Backbone, TruckSearchItemView){
+    'typeahead',
+    'bootstrap'], function(Backbone, TruckSearchItemView){
     return Backbone.View.extend({
 
         className: 'truckSearch',
@@ -21,6 +22,12 @@ define([
                     otherTrucks.set('selected', false);
                 });
                 truck.set('selected', true);
+            });
+            this.$el.popover({
+                trigger: 'hover',
+                container: '#truckSearchContainer',
+                content: 'test'
+
             });
         },
 

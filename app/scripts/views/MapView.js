@@ -25,7 +25,7 @@ define([
                throw new Error('Map view requires a collection');
            }
            this.listenTo(this.collection, 'add', this.renderTruck);
-           this.listenTo(this.collection, 'reset', this.renderTrucks);
+           this.listenTo(this.collection, 'reset', this.resetTrucks);
            this.listenTo(this.collection, 'change:selected', this.selectTruck);
        },
 
@@ -37,7 +37,7 @@ define([
            return this;
        },
 
-       renderTrucks: function(){
+       resetTrucks: function(){
            this.clusterer.clearMarkers();
            _.each(this.truckViews, function(truckView){
                 truckView.destroy();

@@ -14,7 +14,7 @@ define([
             }
             this.typeAhead = new Backbone.Typeahead({
                 collection: this.collection,
-                keys: ['Applicant', 'FoodItems'],
+                keys: ['Applicant', 'FoodItems', 'Address' ],
                 view: TruckSearchItemView
             });
             this.typeAhead.on('selected', function(truck){

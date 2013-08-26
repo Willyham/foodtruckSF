@@ -44,21 +44,24 @@ require([
 ], function (Backbone, Trucks, MapView, TruckSearchView) {
 
     var trucksCollection = new Trucks();
-    var mapView = new MapView({
-        collection: trucksCollection
-    });
-    mapView.render();
+
 
     trucksCollection.fetch().done(function(){
 
-/*        _.delay(function(){
+        var mapView = new MapView({
+            collection: trucksCollection
+        });
+        mapView.render();
 
-            var upcomingTrucks = trucksCollection.filter(function(truck){
-                return truck.get('Status') == 'REQUESTED' && new Date() < new Date(truck.get('ExpirationDate'));
-            });
-            trucksCollection.reset(upcomingTrucks);
-        }, 5000);*/
+        var currentTrucks = trucksCollection.filter(function(truck){
+            return truck.get('Status') == 'APPROVED';
+        });
 
+        var upcomingTrucks = trucksCollection.filter(function(truck){
+            return truck.get('Status') == 'REQUESTED' && new Date() < new Date(truck.get('ExpirationDate'));
+        });
+        
+        trucksCollection.reset(currentTrucks);
 
         var truckSearchView = new TruckSearchView({
             collection: trucksCollection

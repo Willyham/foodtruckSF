@@ -8,7 +8,7 @@ define([
        el: '#map',
        map: null,
        clusterer: null,
-       truckViews: [],
+       truckViews: {},
 
        options: {
            map: {
@@ -25,7 +25,7 @@ define([
                throw new Error('Map view requires a collection');
            }
            this.listenTo(this.collection, 'add', this.renderTruck);
-           this.listenTo(this.collection, 'remove', this.removeTruck);
+           this.listenTo(this.collection, 'reset', this.renderTrucks);
            this.listenTo(this.collection, 'change:selected', this.selectTruck);
        },
 
@@ -35,6 +35,15 @@ define([
                maxZoom: 18
            });
            return this;
+       },
+
+       renderTrucks: function(){
+           this.clusterer.clearMarkers();
+           _.each(this.truckViews, function(truckView){
+                truckView.destroy();
+           });
+           this.truckViews = {};
+           this.collection.forEach(_.bind(this.renderTruck, this));
        },
 
        renderTruck: function(truck){

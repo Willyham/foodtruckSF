@@ -24,6 +24,12 @@ define([
 
         close: function(){
             this.infoWindow.close();
+        },
+
+        destroy: function(){
+            this.close();
+            this.infowWindow = null;
+            this.remove();
         }
     })
 });

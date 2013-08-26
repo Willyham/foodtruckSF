@@ -4,7 +4,7 @@ define([
 
         className: 'truckSearchItemView',
         divName: 'li',
-        template: _.template('<span class="truckName"><%- applicant %></span><span class="truckAddress"><%- address %></span><br/><div class="truckFood"><%- foodItems %></div>'),
+        template: _.template('<span class="truckName text-overflow"><%- applicant %></span><span class="truckAddress"><%- address %></span><br/><div class="truckFood text-overflow"><%- foodItems %></div>'),
 
         events: {
             'click': 'selectItem',

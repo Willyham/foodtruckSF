@@ -50,6 +50,15 @@ define([
             if(this.detailsView){
                 this.detailsView.close();
             }
+        },
+
+        destroy: function(){
+            if(this.detailsView){
+                this.detailsView.destroy();
+            }
+            this.marker.setMap(null);
+            this.marker = null;
+            this.remove();
         }
     })
 });

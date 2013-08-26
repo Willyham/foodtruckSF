@@ -51,6 +51,15 @@ require([
 
     trucksCollection.fetch().done(function(){
 
+/*        _.delay(function(){
+
+            var upcomingTrucks = trucksCollection.filter(function(truck){
+                return truck.get('Status') == 'REQUESTED' && new Date() < new Date(truck.get('ExpirationDate'));
+            });
+            trucksCollection.reset(upcomingTrucks);
+        }, 5000);*/
+
+
         var truckSearchView = new TruckSearchView({
             collection: trucksCollection
         });

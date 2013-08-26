@@ -60,7 +60,7 @@ require([
         var upcomingTrucks = trucksCollection.filter(function(truck){
             return truck.get('Status') == 'REQUESTED' && new Date() < new Date(truck.get('ExpirationDate'));
         });
-        
+
         trucksCollection.reset(currentTrucks);
 
         var truckSearchView = new TruckSearchView({

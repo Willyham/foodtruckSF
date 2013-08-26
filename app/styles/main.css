@@ -4920,5 +4920,8 @@ html, body {
   border-radius: 0px;
   padding: 4px 6px; }
 
+.popover {
+  width: 400px; }
+
 #map {
   z-index: 1; }

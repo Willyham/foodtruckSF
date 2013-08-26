@@ -7,6 +7,7 @@ define([
 
         className: 'truckSearch',
         typeAhead: null,
+        popOverTemplate: "Search by truck name, street or menu. Try <strong>'mission'</strong>, <strong>'indian'</strong> or <strong>'slider shack'</strong>",
 
         initialize: function(){
             if(!this.collection){
@@ -25,9 +26,8 @@ define([
             });
             this.$el.popover({
                 trigger: 'hover',
-                container: '#truckSearchContainer',
-                content: 'test'
-
+                html: true,
+                content: this.popOverTemplate
             });
         },
 

@@ -49,16 +49,13 @@ html, body {
         }
 
         & .truckName{
+            width: 220px;
             font-weight: bold;
             float: left;
         }
 
         & .truckFood{
             width: 350px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space:nowrap;
-            display: inline-block;
         }
 
         & .truckAddress{
@@ -75,6 +72,13 @@ html, body {
             border-bottom: 1px dotted rgba(0,0,0,0.5);
         }
     }
+}
+
+.text-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+    display: inline-block;
 }
 
 .dropdown-menu {

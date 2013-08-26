@@ -1,6 +1,7 @@
 define([
     'backbone',
-    'typeahead'], function(Backbone){
+    'views/TruckSearchItemView',
+    'typeahead'], function(Backbone, TruckSearchItemView){
     return Backbone.View.extend({
 
         className: 'truckSearch',
@@ -12,7 +13,11 @@ define([
             }
             this.typeAhead = new Backbone.Typeahead({
                 collection: this.collection,
-                keys: ['Applicant', 'FoodItems']
+                keys: ['Applicant', 'FoodItems'],
+                view: TruckSearchItemView
+            });
+            this.typeAhead.on('selected', function(truck){
+                truck.set('selected', true);
             });
         },
 

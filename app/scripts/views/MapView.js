@@ -24,8 +24,8 @@ define([
            if(!this.collection){
                throw new Error('Map view requires a collection');
            }
-           this.listenTo(this.collection, 'add', this.renderTruck);
-           this.listenTo(this.collection, 'reset', this.resetTrucks);
+           this.listenTo(this.collection, 'add', this._renderTruck);
+           this.listenTo(this.collection, 'reset', this._resetTrucks);
            this.listenTo(this.collection, 'change:selected', this.selectTruck);
        },
 
@@ -37,16 +37,16 @@ define([
            return this;
        },
 
-       resetTrucks: function(){
+       _resetTrucks: function(){
            this.clusterer.clearMarkers();
            _.each(this.truckViews, function(truckView){
                 truckView.destroy();
            });
            this.truckViews = {};
-           this.collection.forEach(_.bind(this.renderTruck, this));
+           this.collection.forEach(_.bind(this._renderTruck, this));
        },
 
-       renderTruck: function(truck){
+       _renderTruck: function(truck){
            var truckView = new TruckView({
                model: truck,
                map: this.map

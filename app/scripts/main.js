@@ -45,7 +45,7 @@ require([
 
     var trucksCollection = new Trucks();
 
-
+    // Load the trucks collection (without schedule info)
     trucksCollection.fetch().done(function(){
 
         var mapView = new MapView({

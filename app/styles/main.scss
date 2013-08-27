@@ -73,6 +73,17 @@ html, body {
     }
 }
 
+.scheduleItem {
+    padding: 5px 0 5px 0;
+    width: 300px;
+
+    & .day {
+        font-weight: bolder;
+        margin-right: 10px;
+    }
+
+}
+
 .text-overflow {
     overflow: hidden;
     text-overflow: ellipsis;

@@ -4907,6 +4907,13 @@ html, body {
       color: #000;
       border-bottom: 1px dotted rgba(0, 0, 0, 0.5); }
 
+.scheduleItem {
+  padding: 5px 0 5px 0;
+  width: 300px; }
+  .scheduleItem .day {
+    font-weight: bolder;
+    margin-right: 10px; }
+
 .text-overflow {
   overflow: hidden;
   text-overflow: ellipsis;

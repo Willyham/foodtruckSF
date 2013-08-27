@@ -2,10 +2,10 @@ define([
     'backbone'], function(Backbone){
     return Backbone.View.extend({
 
-        scheduleTemplate: _.template('<h4><%- name %></h4><%= status %><%= scheduleList %>'),
+        scheduleTemplate: _.template('<h4 class="truckName"><%- name %></h4><%= status %><%= scheduleList %>'),
         scheduleItemTemplate: _.template('<div class="scheduleItem"><span class="day"><%- day %></span> from <span class="from"><%- from %></span> until <span class="to"><%- to %></span></div>'),
-        closedTemplate: '<div class="status closed">Closed</div>',
-        openTemplate: '<div class="status open">Open</div>',
+        closedTemplate: '<div class="status closed">Closed <i class="icon-time"></i></div>',
+        openTemplate: '<div class="status open">Open <i class="icon-time"></i></div>',
 
         initialize: function(){
             if(!this.options.map){

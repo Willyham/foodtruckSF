@@ -1,4 +1,4 @@
-$iconSpritePath: '/images/glyphicons-halflings.png';
+$iconSpritePath: '../images/glyphicons-halflings.png';
 @import '../bower_components/sass-bootstrap/lib/bootstrap';
 
 html, body {
@@ -47,12 +47,6 @@ html, body {
             cursor: pointer;
         }
 
-        & .truckName{
-            width: 200px;
-            font-weight: bold;
-            float: left;
-        }
-
         & .truckFood{
             width: 360px;
         }
@@ -73,15 +67,37 @@ html, body {
     }
 }
 
+.truckName{
+    width: 200px;
+    font-weight: bold;
+    float: left;
+}
+
 .scheduleItem {
     padding: 5px 0 5px 0;
     width: 300px;
+    float: left;
+    clear: both;
 
     & .day {
         font-weight: bolder;
         margin-right: 10px;
     }
+}
 
+.status{
+    text-transform: uppercase;
+    float: left;
+    margin-top: 10px;
+    margin-left: 30px;
+
+    &.open{
+        color: #00A000;
+    }
+
+    &.closed{
+        color: red;
+    }
 }
 
 .text-overflow {
@@ -105,4 +121,8 @@ html, body {
 
 #map {
     z-index: 1;
+}
+
+button{
+    border-radius: 0px;
 }

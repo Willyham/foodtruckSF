@@ -22,10 +22,17 @@ define([
                 content: 'Loading...'
             });
 
-            // Lazy load the schedules for this truck
+            // Load the schedules for this truck by fetching the individual model.
             this.model.fetch().done(_.bind(this._calculateScheduleDisplay, this));
         },
 
+        /**
+         * Determine and display the schedule text for the truck.
+         * 1. Sort the items by day of the week.
+         * 2. Compile a list of <day> from <start> to <end> style texts
+         * 3. Build the final HTML and set as the content of the info window.
+         * @private
+         */
         _calculateScheduleDisplay: function(){
             var self = this;
             var sortedModels = this.model.schedule.sortBy(function(schedule){
@@ -48,6 +55,12 @@ define([
             this.infoWindow.setContent(schedule);
         },
 
+        /**
+         * Determine if the truck is open now based on the schedule.
+         * @returns {Boolean} true is the truck is open now, false otherwise.
+         * FIXME: Assumes PDT
+         * @private
+         */
         _isOpenNow: function(){
             var currentTime = new Date();
             // Find the schedule for today
@@ -67,14 +80,23 @@ define([
             return Boolean(startTime < currentTime && currentTime < endTime);
         },
 
+        /**
+         * Show the info window.
+         */
         open: function(){
             this.infoWindow.open(this.options.map, this.options.marker);
         },
 
+        /**
+         * Close the info window
+         */
         close: function(){
             this.infoWindow.close();
         },
 
+        /**
+         * Destroy the info window and the view
+         */
         destroy: function(){
             this.close();
             this.infowWindow = null;

@@ -9,13 +9,22 @@ define([
         typeAhead: null,
         popOverTemplate: "Search by truck name, street or menu. Try <strong>'mission'</strong>, <strong>'indian'</strong> or <strong>'slider shack'</strong>",
 
+        options: {
+            // Define which attributes to search on
+            searchKeys: ['Applicant', 'FoodItems', 'Address' ]
+        },
+
+        /**
+         * Initialise the view.
+         * Create the type ahead functionality and render a popover
+         */
         initialize: function(){
             if(!this.collection){
                 throw new Error('TruckView requires a Trucks collection');
             }
             this.typeAhead = new Backbone.Typeahead({
                 collection: this.collection,
-                keys: ['Applicant', 'FoodItems', 'Address' ],
+                keys: this.options.searchKeys,
                 view: TruckSearchItemView
             });
             this.typeAhead.on('selected', function(truck){

@@ -53,10 +53,13 @@ require([
         });
         mapView.render();
 
+        // Perform some client side filtering and reset the collection to fire the reset event and build the map
         var currentTrucks = trucksCollection.filter(function(truck){
             return truck.get('Status') == 'APPROVED';
         });
 
+        //TODO: Find a good way to switch to this view.
+        //Just a POC to show that switching between filtered sets works correctly.
         var upcomingTrucks = trucksCollection.filter(function(truck){
             return truck.get('Status') == 'REQUESTED' && new Date() < new Date(truck.get('ExpirationDate'));
         });

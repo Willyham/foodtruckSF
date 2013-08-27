@@ -2,18 +2,23 @@ define(['backbone', 'collections/Schedule'], function(Backbone, Schedule){
     return Backbone.Model.extend({
         idAttribute: "_id",
 
+        /**
+         * Create a schedule collection for each truck.
+         */
         constructor: function() {
-            // Create a schedule collection for each truck.
             this.schedule = new Schedule();
             Backbone.Model.prototype.constructor.apply(this, arguments);
         },
 
         initialize: function(attributes, options) {
-            this.on('change:schedule', this.scheduleChanged, this);
+            this.on('change:schedule', this._scheduleChanged, this);
         },
 
-        // Proxy changes to 'schedule' attribute into the collection
-        scheduleChanged: function(){
+        /**
+         * Proxy changes to 'schedule' attribute into the collection
+         * @private
+         */
+        _scheduleChanged: function(){
             var schedule = this.get('schedule');
             if(schedule){
                 this.schedule.set(schedule);

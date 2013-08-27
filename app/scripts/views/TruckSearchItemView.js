@@ -19,6 +19,11 @@ define([
             this.parent = options.parent;
         },
 
+        /**
+         * Render each item in the list.
+         * Remove all of the instances of 'cold truck' which isn't really a food item.
+         * @returns {TruckSearchItemView} this
+         */
         render: function(){
             var foodItems = _.reject( this.model.get('FoodItems').split(':'), function(item){
                 return item.toLowerCase().match(/cold truck\.?/);
@@ -31,14 +36,24 @@ define([
             return this;
         },
 
+        /**
+         * Select the model when a user clicks.
+         * Unfortunately, this is the way the type ahead plugin expects the selecting to work.
+         */
         selectItem: function() {
             this.parent.selectModel(this.model);
         },
 
+        /**
+         * Add an 'active' class on hover
+         */
         activateItem: function(){
             this.$el.children('.truckAddress').addClass('active');
         },
 
+        /**
+         * Remove the 'active' class on hover
+         */
         deactivateItem: function(){
             this.$el.children('.truckAddress').removeClass('active');
         }
